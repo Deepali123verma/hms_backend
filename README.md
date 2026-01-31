@@ -39,7 +39,8 @@ hotel-management-backend/
 
 ## 🔑 Environment Variables (.env)
 
-DATABASE_URL=postgresql+psycopg2://postgres:Admin123@localhost:5432/hms_db 
+DATABASE_URL=postgresql+psycopg2://postgres:Admin123@localhost:5432/hms_db
+
 SECRET_KEY=your_secret_key
 
 ---
