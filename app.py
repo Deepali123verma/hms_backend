@@ -11,6 +11,7 @@ from routes.billing import api as billing_api
 from routes.staff import api as staff_api
 from routes.restaurant import api as restaurant_api
 
+from routes.status import bp as status_bp
 
 def create_app():
     app = Flask(__name__)
@@ -19,8 +20,11 @@ def create_app():
     db.init_app(app)
     Migrate(app, db)
 
-    # Register blueprint first
+    # Existing blueprint
     app.register_blueprint(bp, url_prefix="/api")
+
+    # Health blueprint register
+    app.register_blueprint(status_bp, url_prefix="/api")
 
     # Register all namespaces
     api.add_namespace(auth_api, path="/auth")
@@ -32,11 +36,8 @@ def create_app():
 
     return app
 
+
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
-    
-@app.route("/api/health")
-def health():
-    return {"status": "ok"}
 
