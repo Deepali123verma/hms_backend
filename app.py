@@ -21,8 +21,7 @@ def create_app():
 
     CORS(
         app,
-        origins=["https://c0ffe481-d37f-4264-a018-b0e72c36342c.lovableproject.com"],
-        supports_credentials=True,
+        resources={r"/api/*": {"origins": "*"}},
         allow_headers=["Content-Type", "Authorization"],
         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     )
@@ -45,7 +44,5 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
-
-
+    app.run(debug=True)  ab theek hna ye code
 
