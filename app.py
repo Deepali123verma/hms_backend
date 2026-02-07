@@ -10,30 +10,29 @@ from routes.booking import api as booking_api
 from routes.billing import api as billing_api
 from routes.staff import api as staff_api
 from routes.restaurant import api as restaurant_api
-
 from routes.status import bp as status_bp
+
 from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)
-
-# rest of your routes
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    CORS(
+        app,
+        origins=["https://c0ffe481-d37f-4264-a018-b0e72c36342c.lovableproject.com"],
+        supports_credentials=True,
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    )
+
     db.init_app(app)
     Migrate(app, db)
 
-    # Existing blueprint
     app.register_blueprint(bp, url_prefix="/api")
-
-    # Health blueprint register
     app.register_blueprint(status_bp, url_prefix="/api")
 
-    # Register all namespaces
     api.add_namespace(auth_api, path="/auth")
     api.add_namespace(rooms_api, path="/rooms")
     api.add_namespace(booking_api, path="/booking")
