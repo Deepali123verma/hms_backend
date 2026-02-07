@@ -12,6 +12,13 @@ from routes.staff import api as staff_api
 from routes.restaurant import api as restaurant_api
 
 from routes.status import bp as status_bp
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+# rest of your routes
+
 
 def create_app():
     app = Flask(__name__)
@@ -40,4 +47,6 @@ def create_app():
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
+
+
 
